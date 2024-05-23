@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = "~/Views/Shares/Main.cshtml";
+    var errorMessage = TempData["error"] as string;
+}
+
+<div class="container-login-register">
+    <div class="login-register">
+        <h1>Đăng nhập</h1>
+        @*<div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+            @php
+            $message = Session::get('error');
+            if($message) {
+            echo $message;
+            Session::put('error', null);
+            }
+            @endphp
+        </div>*@
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+                @errorMessage
+            </div>
+        }
+        <form action="@Url.Action("postLogin", "Admin")" method="POST">
+            @Html.AntiForgeryToken()
+
+
+            <div>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" placeholder="Nhập email" required><br>
+            </div>
+
+            <div>
+                <label for="password">Mật khẩu:</label><br>
+                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required><br>
+            </div>
+
+            <button type="submit" name="loginSubmit">Đăng nhập</button>
+        </form>
+    </div>
+</div>
+@Html.Partial("~/Views/elements/footer.cshtml")

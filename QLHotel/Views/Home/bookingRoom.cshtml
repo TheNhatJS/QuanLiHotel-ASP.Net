@@ -1,0 +1,119 @@
+﻿@*@model IEnumerable<QLHotel.SQLHotel.tbl_booking>*@
+
+@{
+    Layout = "~/Views/Shares/Main.cshtml";
+    var errorMessage = TempData["error"] as string;
+}
+
+
+
+<div class="container-booking">
+    <div class="item-img-booking">
+        <img src="~/hotel/assets/img/Room/@ViewBag.Room.image" alt="" class="image-booking" style="object-fit: cover; border-radius: 15px">
+    </div>
+
+    <div class="content-booking">
+        <div class="inf-room">
+            <table class="tb-inf-room">
+                <tr>
+                    <th>Phòng:</th>
+                    <td>@ViewBag.Room.name</td>
+                </tr>
+
+                <tr>
+                    <th>Trạng thái:</th>
+                    <td>
+                        @if (ViewBag.Room.status == 0)
+                        {
+                            <span>Đã thuê</span>
+                        }
+                        else
+                        {
+                            <span>Đang trống</span>
+                        }
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Loại phòng:</th>
+                    <td>@ViewBag.Room.type</td>
+                </tr>
+
+                <tr>
+                    <th>Số người tối đa:</th>
+                    <td>@ViewBag.Room.countPeople</td>
+                </tr>
+
+                <tr>
+                    <th>Giá phòng:</th>
+                    <td>@String.Format("{0:N0}", ViewBag.Room.price) VNĐ/đêm</td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2" style="font-size: 14px; font-weight: 100; line-height: 1.4; text-align: justify">
+                       @ViewBag.Room.info
+                        
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="inf-booking">
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+                    @errorMessage
+                </div>
+            }
+        <form action="@Url.Action("postBookingRoom", "Admin")" method="POST">
+
+            @Html.AntiForgeryToken()
+
+            @{
+                var user = Session["userr"] as QLHotel.SQLHotel.tbl_user;
+            }
+            <input type="hidden" name="roomID" value="@ViewBag.Room.roomID">
+
+            <div>
+                <label for="name">Họ và tên</label><br>
+                <input type="text" id="name" name="name" required value="@user.name" readonly required><br>
+            </div>
+
+            <div>
+                <label for="phone">Số điện thoại</label><br>
+                <input type="text" id="phone" name="phone" value="@user.phone" maxlength="10" readonly required><br>
+            </div>
+
+            <div>
+                <label for="email">Email</label><br>
+                <input type="email" id="email" name="email" value="@user.email" readonly required><br>
+            </div>
+
+            <div>
+                <label for="checkIn">Ngày nhận phòng</label><br>
+                <input type="date" id="checkIn" name="checkIn" placeholder="dd/mm/yy" required><br>
+            </div>
+
+            <div>
+                <label for="checkOut">Ngày trả phòng</label><br>
+                <input type="date" id="checkOut" name="checkOut" placeholder="dd/mm/yy" required><br>
+            </div>
+
+            <div>
+                <label for="countPeople">Số lượng người</label><br>
+                <input type="number" id="countPeople" name="countPeople" min="1" required><br>
+            </div>
+
+            <div>
+                <label for="note">Ghi chú</label><br>
+                <textarea name="note" id="note" cols="30" rows="10" placeholder="Ghi chú cho khách sạn"></textarea><br>
+            </div>
+
+            <button type="submit" name="btn-booking">Đặt phòng</button>
+        </form>
+        </div>
+    </div>
+</div>
+@Html.Partial("~/Views/elements/footer.cshtml")

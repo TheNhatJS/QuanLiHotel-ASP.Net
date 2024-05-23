@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="QLKhachSanModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_bill">
+          <Key>
+            <PropertyRef Name="billID" />
+          </Key>
+          <Property Name="billID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookingID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="pay" Type="int" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_booking">
+          <Key>
+            <PropertyRef Name="bookingID" />
+          </Key>
+          <Property Name="bookingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="roomID" Type="int" Nullable="false" />
+          <Property Name="checkInDate" Type="date" Nullable="false" />
+          <Property Name="checkOutDate" Type="date" Nullable="false" />
+          <Property Name="odCountPeople" Type="int" Nullable="false" />
+          <Property Name="note" Type="text" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_room">
+          <Key>
+            <PropertyRef Name="roomID" />
+          </Key>
+          <Property Name="roomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="type" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="price" Type="bigint" Nullable="false" />
+          <Property Name="countPeople" Type="int" Nullable="false" />
+          <Property Name="status" Type="tinyint" Nullable="false" />
+          <Property Name="info" Type="text" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="role" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+        </EntityType>
+        <Association Name="tbl_bill_bookingid_foreign">
+          <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="1" />
+          <End Role="tbl_bill" Type="Self.tbl_bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_booking">
+              <PropertyRef Name="bookingID" />
+            </Principal>
+            <Dependent Role="tbl_bill">
+              <PropertyRef Name="bookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbl_bill_userid_foreign">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_bill" Type="Self.tbl_bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tbl_bill">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbl_booking_roomid_foreign">
+          <End Role="tbl_room" Type="Self.tbl_room" Multiplicity="1" />
+          <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_room">
+              <PropertyRef Name="roomID" />
+            </Principal>
+            <Dependent Role="tbl_booking">
+              <PropertyRef Name="roomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbl_booking_userid_foreign">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tbl_booking">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLKhachSanModelStoreContainer">
+          <EntitySet Name="tbl_bill" EntityType="Self.tbl_bill" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_booking" EntityType="Self.tbl_booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_room" EntityType="Self.tbl_room" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="tbl_bill_bookingid_foreign" Association="Self.tbl_bill_bookingid_foreign">
+            <End Role="tbl_booking" EntitySet="tbl_booking" />
+            <End Role="tbl_bill" EntitySet="tbl_bill" />
+          </AssociationSet>
+          <AssociationSet Name="tbl_bill_userid_foreign" Association="Self.tbl_bill_userid_foreign">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_bill" EntitySet="tbl_bill" />
+          </AssociationSet>
+          <AssociationSet Name="tbl_booking_roomid_foreign" Association="Self.tbl_booking_roomid_foreign">
+            <End Role="tbl_room" EntitySet="tbl_room" />
+            <End Role="tbl_booking" EntitySet="tbl_booking" />
+          </AssociationSet>
+          <AssociationSet Name="tbl_booking_userid_foreign" Association="Self.tbl_booking_userid_foreign">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_booking" EntitySet="tbl_booking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLKhachSanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_bill">
+          <Key>
+            <PropertyRef Name="billID" />
+          </Key>
+          <Property Name="billID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookingID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="pay" Type="Int32" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_booking" Relationship="Self.tbl_bill_bookingid_foreign" FromRole="tbl_bill" ToRole="tbl_booking" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.tbl_bill_userid_foreign" FromRole="tbl_bill" ToRole="tbl_user" />
+        </EntityType>
+        <EntityType Name="tbl_booking">
+          <Key>
+            <PropertyRef Name="bookingID" />
+          </Key>
+          <Property Name="bookingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="roomID" Type="Int32" Nullable="false" />
+          <Property Name="checkInDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="checkOutDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="odCountPeople" Type="Int32" Nullable="false" />
+          <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_bill" Relationship="Self.tbl_bill_bookingid_foreign" FromRole="tbl_booking" ToRole="tbl_bill" />
+          <NavigationProperty Name="tbl_room" Relationship="Self.tbl_booking_roomid_foreign" FromRole="tbl_booking" ToRole="tbl_room" />
+          <NavigationProperty Name="tbl_user" Relationship="Self.tbl_booking_userid_foreign" FromRole="tbl_booking" ToRole="tbl_user" />
+        </EntityType>
+        <EntityType Name="tbl_room">
+          <Key>
+            <PropertyRef Name="roomID" />
+          </Key>
+          <Property Name="roomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Int64" Nullable="false" />
+          <Property Name="countPeople" Type="Int32" Nullable="false" />
+          <Property Name="status" Type="Byte" Nullable="false" />
+          <Property Name="info" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_booking" Relationship="Self.tbl_booking_roomid_foreign" FromRole="tbl_room" ToRole="tbl_booking" />
+        </EntityType>
+        <EntityType Name="tbl_user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_bill" Relationship="Self.tbl_bill_userid_foreign" FromRole="tbl_user" ToRole="tbl_bill" />
+          <NavigationProperty Name="tbl_booking" Relationship="Self.tbl_booking_userid_foreign" FromRole="tbl_user" ToRole="tbl_booking" />
+        </EntityType>
+        <Association Name="tbl_bill_bookingid_foreign">
+          <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="1" />
+          <End Role="tbl_bill" Type="Self.tbl_bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_booking">
+              <PropertyRef Name="bookingID" />
+            </Principal>
+            <Dependent Role="tbl_bill">
+              <PropertyRef Name="bookingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbl_bill_userid_foreign">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_bill" Type="Self.tbl_bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tbl_bill">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbl_booking_roomid_foreign">
+          <End Role="tbl_room" Type="Self.tbl_room" Multiplicity="1" />
+          <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_room">
+              <PropertyRef Name="roomID" />
+            </Principal>
+            <Dependent Role="tbl_booking">
+              <PropertyRef Name="roomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="tbl_booking_userid_foreign">
+          <End Role="tbl_user" Type="Self.tbl_user" Multiplicity="1" />
+          <End Role="tbl_booking" Type="Self.tbl_booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_user">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="tbl_booking">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLKhachSanEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_bill" EntityType="Self.tbl_bill" />
+          <EntitySet Name="tbl_booking" EntityType="Self.tbl_booking" />
+          <EntitySet Name="tbl_room" EntityType="Self.tbl_room" />
+          <EntitySet Name="tbl_user" EntityType="Self.tbl_user" />
+          <AssociationSet Name="tbl_bill_bookingid_foreign" Association="Self.tbl_bill_bookingid_foreign">
+            <End Role="tbl_booking" EntitySet="tbl_booking" />
+            <End Role="tbl_bill" EntitySet="tbl_bill" />
+          </AssociationSet>
+          <AssociationSet Name="tbl_bill_userid_foreign" Association="Self.tbl_bill_userid_foreign">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_bill" EntitySet="tbl_bill" />
+          </AssociationSet>
+          <AssociationSet Name="tbl_booking_roomid_foreign" Association="Self.tbl_booking_roomid_foreign">
+            <End Role="tbl_room" EntitySet="tbl_room" />
+            <End Role="tbl_booking" EntitySet="tbl_booking" />
+          </AssociationSet>
+          <AssociationSet Name="tbl_booking_userid_foreign" Association="Self.tbl_booking_userid_foreign">
+            <End Role="tbl_user" EntitySet="tbl_user" />
+            <End Role="tbl_booking" EntitySet="tbl_booking" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLKhachSanModelStoreContainer" CdmEntityContainer="QLKhachSanEntities1">
+          <EntitySetMapping Name="tbl_bill">
+            <EntityTypeMapping TypeName="QLKhachSanModel.tbl_bill">
+              <MappingFragment StoreEntitySet="tbl_bill">
+                <ScalarProperty Name="billID" ColumnName="billID" />
+                <ScalarProperty Name="bookingID" ColumnName="bookingID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="pay" ColumnName="pay" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_booking">
+            <EntityTypeMapping TypeName="QLKhachSanModel.tbl_booking">
+              <MappingFragment StoreEntitySet="tbl_booking">
+                <ScalarProperty Name="bookingID" ColumnName="bookingID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="roomID" ColumnName="roomID" />
+                <ScalarProperty Name="checkInDate" ColumnName="checkInDate" />
+                <ScalarProperty Name="checkOutDate" ColumnName="checkOutDate" />
+                <ScalarProperty Name="odCountPeople" ColumnName="odCountPeople" />
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_room">
+            <EntityTypeMapping TypeName="QLKhachSanModel.tbl_room">
+              <MappingFragment StoreEntitySet="tbl_room">
+                <ScalarProperty Name="roomID" ColumnName="roomID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="countPeople" ColumnName="countPeople" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="info" ColumnName="info" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_user">
+            <EntityTypeMapping TypeName="QLKhachSanModel.tbl_user">
+              <MappingFragment StoreEntitySet="tbl_user">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

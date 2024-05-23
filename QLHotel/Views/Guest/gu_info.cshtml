@@ -1,0 +1,75 @@
+﻿
+@{
+    Layout = "~/Views/Guest/Index.cshtml";
+    var Message = TempData["error"] as string;
+}
+
+@section gu_content
+{
+    <div id="inf-user">
+        @* Hiển thị lỗi *@
+        <div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+            @Message
+        </div>
+
+        <table class="tb-info-user" border="1px">
+            <form action="@Url.Action("gu_postUpdateInfo", "Guest")" method="POST" class="form-user">
+                @Html.AntiForgeryToken()
+                @{
+                    var user = Session["userr"] as QLHotel.SQLHotel.tbl_user;
+                }
+            <tr class="tr-info-user">
+                <th>
+                    <label for="name">Họ và tên</label>
+                </th>
+
+                <td><input type="text" value="@user.name" name="name"></td>
+            </tr>
+
+            <tr class="tr-info-user">
+                <th>
+                    <label for="email">Email</label>
+                </th>
+
+                <td><input type="email" value="@user.email" name="email"></td>
+            </tr>
+
+            <tr class="tr-info-user">
+                <th>
+                    <label for="phone">Phone</label>
+                </th>
+
+                <td><input type="text" value="@user.phone" name="phone"></td>
+            </tr>
+
+            <tr class="tr-info-user">
+                <th>
+                    <label for="oldPassword">Nhập mật khẩu cũ</label>
+                </th>
+
+                <td><input type="password" placeholder="Nhập mật khẩu cũ" name="oldPassword" required></td>
+            </tr>
+
+            <tr class="tr-info-user">
+                <th>
+                    <label for="newPassword">Nhập mật khẩu mới</label>
+                </th>
+
+                <td><input type="password" placeholder="Nhập mật khẩu mới" name="newPassword"></td>
+            </tr>
+
+            <tr class="tr-info-user">
+                <th>
+                    <label for="reNewPassword">Nhập lại mật khẩu mới</label>
+                </th>
+
+                <td><input type="password" placeholder="Nhập lại mật khẩu mới" name="reNewPassword"></td>
+            </tr>
+
+            <button type="submit" name="btn-update">Cập nhật</button>
+
+            </form>
+        </table>
+    </div>
+}
+

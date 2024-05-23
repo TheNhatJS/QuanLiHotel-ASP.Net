@@ -1,0 +1,58 @@
+﻿@model IEnumerable<QLHotel.SQLHotel.tbl_user>
+@{
+    Layout = "~/Views/Admin/Index.cshtml";
+    var errorMessage = TempData["error"] as string;
+}
+
+@section ad_content
+{
+    <div id="ad-room-list">
+        <div style="width: 90%; background-color: #b5e1f4; padding: 5px; margin: 20px auto 10px auto; text-align: center; border-radius: 5px">
+            <h1 class="ad-list-title">Danh sách người dùng</h1>
+        </div>
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+                @errorMessage
+            </div>
+        }
+        <div style="padding: 20px; background-color: #fcfcfc; box-shadow: 0 0 10px rgba(56, 56, 56, 0.6); border-radius: 5px; width: 90%; margin: auto">
+
+            <table border="1px">
+                <thead style="background-color: #b5e1f4;">
+                <th>STT</th>
+                <th>Họ và tên</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+                </thead>
+
+                <tbody>
+                    @{
+                        int key = 0;
+                        foreach (var cateUser in Model)
+                        {
+                            key++;
+                            <tr>
+                                <td>@key</td>
+                                <td>@cateUser.name</td>
+                                <td>@cateUser.email</td>
+                                <td>@cateUser.phone</td>
+                                <td>
+                                    <a href="@Url.Action("removeUser", "Admin", new { idUser = cateUser.userID })" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
+                                        <i class="ti-trash">
+
+                                        </i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+

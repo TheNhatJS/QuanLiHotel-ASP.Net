@@ -1,0 +1,87 @@
+﻿<div class="bg-room">
+    <div class="room-list content-section">
+        <h2>Danh sách các phòng</h2>
+
+        @* Standard *@
+        <h3 class="room-title" id="Standard">Standard</h3>
+        <div class="room owl-carousel owl-theme">
+            @foreach (var cateRoom in Model)
+            {
+                if (cateRoom.type == "Standard" && cateRoom.status == 1)
+                {
+                    <div class="room-items">
+                        <div class="room-img">
+                            <img src="~/hotel/assets/img/Room/@cateRoom.image" alt="" class="image-room">
+                        </div>
+                        <div class="room-body mt-5">
+                            <p>Phòng: @cateRoom.name</p>
+                            <p>Giá: @String.Format("{0:N0}", cateRoom.price) VNĐ/ngày</p>
+                            <button class="room-btn"><a href="@Url.Action("bookingRoom", "Home", new { idRoom = cateRoom.roomID })">Xem thêm</a></button>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <h3 class="room-title" id="Superior">Superior</h3>
+        <div class="room owl-carousel owl-theme">
+            @foreach (var cateRoom in Model)
+            {
+                if (cateRoom.type == "Superior" && cateRoom.status == 1)
+                {
+                    <div class="room-items">
+                        <div class="room-img">
+                            <img src="~/hotel/assets/img/Room/@cateRoom.image" alt="" class="image-room">
+                        </div>
+                        <div class="room-body mt-5">
+                            <p>Phòng: @cateRoom.name</p>
+                            <p>Giá: @String.Format("{0:N0}", cateRoom.price) VNĐ/ngày</p>
+                            <button class="room-btn"><a href="@Url.Action("bookingRoom", "Home", new { idRoom = cateRoom.roomID })">Xem thêm</a></button>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <h3 class="room-title" id="Deluxe">Deluxe</h3>
+        <div class="room owl-carousel owl-theme">
+            @foreach (var cateRoom in Model)
+            {
+                if (cateRoom.type == "Deluxe" && cateRoom.status == 1)
+                {
+                    <div class="room-items">
+                        <div class="room-img">
+                            <img src="~/hotel/assets/img/Room/@cateRoom.image" alt="" class="image-room">
+                        </div>
+                        <div class="room-body mt-5">
+                            <p>Phòng: @cateRoom.name</p>
+                            <p>Giá: @String.Format("{0:N0}", cateRoom.price) VNĐ/ngày</p>
+                            <button class="room-btn"><a href="@Url.Action("bookingRoom", "Home", new { idRoom = cateRoom.roomID })">Xem thêm</a></button>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+        <h3 class="room-title" id="Suite">Suite</h3>
+        <div class="room owl-carousel owl-theme">
+            @foreach (var cateRoom in Model)
+            {
+                if (cateRoom.type == "Suite" && cateRoom.status == 1)
+                {
+                    <div class="room-items">
+                        <div class="room-img">
+                            <img src="~/hotel/assets/img/Room/@cateRoom.image" alt="" class="image-room">
+                        </div>
+                        <div class="room-body mt-5">
+                            <p>Phòng: @cateRoom.name</p>
+                            <p>Giá: @String.Format("{0:N0}", cateRoom.price) VNĐ/ngày</p>
+                            <button class="room-btn"><a href="@Url.Action("bookingRoom", "Home", new { idRoom = cateRoom.roomID })">Xem thêm</a></button>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,20 @@
+﻿
+@model IEnumerable<QLHotel.SQLHotel.tbl_room>
+
+@{
+    Layout = "~/Views/Shares/Main.cshtml";
+}
+
+<div id="content">
+    @Html.Partial("~/Views/elements/slider.cshtml")
+
+    @Html.Partial("~/Views/elements/about_us.cshtml")
+
+    @Html.Partial("~/Views/elements/list_room.cshtml")
+
+    @Html.Partial("~/Views/elements/tien_ich.cshtml")
+
+    @Html.Partial("~/Views/elements/contact.cshtml")
+</div>
+
+@Html.Partial("~/Views/elements/footer.cshtml")

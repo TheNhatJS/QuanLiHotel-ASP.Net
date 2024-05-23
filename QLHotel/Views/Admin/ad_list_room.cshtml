@@ -1,0 +1,92 @@
+﻿@model IEnumerable<QLHotel.SQLHotel.tbl_room>
+@{
+    Layout = "~/Views/Admin/Index.cshtml";
+    var Message = TempData["error"] as string;
+}
+
+@section ad_content
+{
+    <div id="ad-room-list">
+        <div style="width: 90%; background-color: #b5e1f4; padding: 5px; margin: 20px auto 10px auto; text-align: center; border-radius: 5px">
+            <h1 class="ad-list-title">Danh sách phòng</h1>
+        </div>
+        
+        <div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+            @Message
+        </div>
+
+        <div style="padding: 20px; background-color: #fcfcfc; box-shadow: 0 0 10px rgba(56, 56, 56, 0.6); border-radius: 5px; width: 90%; margin: auto">
+
+            <table border="1px">
+                <thead style="background-color: #b5e1f4;">
+                <th>STT</th>
+                <th>Ảnh</th>
+                <th>Tên phòng</th>
+                <th>Thông tin</th>
+                <th>Trạng thái</th>
+                <th>Loại</th>
+                <th>Giá</th>
+                <th>Số người tối đa</th>
+
+                <th colspan="2">Action</th>
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int key = 0;
+                        foreach (var cateRoom in Model)
+                        {
+                            key++;
+                            <tr>
+                                <td style="width: 50px">@key</td>
+                                <td style="width: 200px"><img src="~/hotel/assets/img/Room/@cateRoom.image" alt="" style="width: 100%; object-fit: cover"></td>
+                                <td>@cateRoom.name</td>
+                                <td>
+                                    @cateRoom.info
+
+                                </td>
+                                <td>
+                                    @if (cateRoom.status == 0)
+                                    {
+                                        <span>Đã thuê</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Đang trống</span>
+                                    }
+                                </td>
+
+                                <td>@cateRoom.type</td>
+
+                                <td>@cateRoom.price</td>
+
+                                <td>@cateRoom.countPeople</td>
+
+
+                                <td>
+                                    <a href="@Url.Action("updateRoom", "Admin", new { idRoom = cateRoom.roomID })">
+                                        <i class="ti-pencil">
+
+                                        </i>
+                                    </a>
+                                <td>
+                                    <a href="@Url.Action("removeRoom", "Admin", new { idRoom = cateRoom.roomID })" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')">
+                                        <i class="ti-trash">
+
+                                        </i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+}
+

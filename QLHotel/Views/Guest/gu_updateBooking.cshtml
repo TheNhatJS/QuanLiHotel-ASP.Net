@@ -1,0 +1,125 @@
+﻿@using QLHotel.SQLHotel
+@{
+    Layout = "~/Views/Shares/Main.cshtml";
+
+    var Message = TempData["error"] as string;
+}
+
+<div class="container-booking">
+    @{ 
+        int idRoom = ViewBag.Booking.roomID;
+        QLKhachSanEntities1 db = new QLKhachSanEntities1();
+        tbl_room room = db.tbl_room.FirstOrDefault(r => r.roomID == idRoom);
+    }
+
+    <div class="item-img-booking">
+        <img src="~/hotel/assets/img/Room/@room.image" alt="" class="image-booking" style="object-fit: cover; border-radius: 15px">
+    </div>
+
+    <div class="content-booking">
+        <div class="inf-room">
+            <table class="tb-inf-room">
+                <tr>
+                    <th>Phòng:</th>
+                    <td>@room.name</td>
+                </tr>
+
+                <tr>
+                    <th>Trạng thái:</th>
+                    <td>@(room.status == 1 ? "Đang trống" : "Đã thuê" )</td>
+                </tr>
+
+                <tr>
+                    <th>Loại phòng:</th>
+                    <td>@room.type</td>
+                </tr>
+
+                <tr>
+                    <th>Số người tối đa:</th>
+                    <td>@room.countPeople</td>
+                </tr>
+
+                <tr>
+                    <th>Giá phòng:</th>
+                    <td>@room.price VNĐ/đêm</td>
+                </tr>
+
+                <tr>
+                    <th>Tiền đặt cọc(10%):</th>
+                    <td>
+                        @{
+                            var datCoc = room.price * 0.1;
+
+                        }
+                        @String.Format("{0:N0}", datCoc) VNĐ/ngày
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" style="font-size: 14px; font-weight: 100; line-height: 1.4; text-align: justify">
+                        @room.info
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="inf-booking">
+            <div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+                @Message
+            </div>
+
+            <form action="@Url.Action("gu_postUpdateBooking", "Guest")" method="POST">
+
+                @Html.AntiForgeryToken()
+
+                @{
+                    var user = Session["userr"] as QLHotel.SQLHotel.tbl_user;
+                }
+
+                <input type="hidden" name="roomID" value="@room.roomID">
+                <input type="hidden" name="bookingID" value="@ViewBag.Booking.bookingID">
+
+                <div>
+                    <label for="name">Họ và tên</label><br>
+                    <input type="text" id="name" name="name" required value="@user.name" readonly><br>
+                </div>
+
+                <div>
+                    <label for="phone">Số điện thoại</label><br>
+                    <input type="text" id="phone" name="phone" value="@user.phone" maxlength="10" readonly required><br>
+                </div>
+
+                <div>
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email" name="email" value="@user.email" readonly required><br>
+                </div>
+
+                <div>
+                    <label for="checkIn">Ngày nhận phòng</label><br>
+                    <input type="date" id="checkIn" name="checkIn" value="@((ViewBag.Booking.checkInDate as DateTime?)?.ToString("yyyy-MM-dd"))" required><br>
+                </div>
+
+                <div>
+                    <label for="checkOut">Ngày trả phòng</label><br>
+                    <input type="date" id="checkOut" name="checkOut" value="@((ViewBag.Booking.checkOutDate as DateTime?)?.ToString("yyyy-MM-dd"))" required><br>
+                </div>
+
+                <div>
+                    <label for="countPeople">Số lượng người</label><br>
+                    <input type="number" id="countPeople" name="countPeople" max="@room.countPeople" value="@ViewBag.Booking.odCountPeople" required><br>
+                </div>
+
+                <div>
+                    <label for="note">Ghi chú</label><br>
+                    <textarea name="note" id="note" cols="30" rows="10" placeholder="Ghi chú cho khách sạn">@ViewBag.Booking.note</textarea><br>
+                </div>
+
+                <button type="submit" name="btn-update">Cập nhật</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+@Html.Partial("~/Views/elements/footer.cshtml")
+

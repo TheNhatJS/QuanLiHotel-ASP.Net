@@ -1,0 +1,956 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* Hành vi khi cuộn */
+    scroll-behavior: smooth;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mt-5 {
+    margin-top: 5px !important;
+}
+
+.mt-80 {
+    margin-top: 80px !important;
+}
+
+.mb-80 {
+    margin-bottom: 80px !important;
+}
+
+/* Header */
+#header {
+    display: flex;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 60px;
+    background-color: #000;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+    color: #fff;
+
+    z-index: 2;
+}
+
+#header #nav,
+#nav .sub-nav,
+#nav-user,
+#nav-user .sub-nav-user {
+    list-style-type: none;
+}
+
+#nav > li {
+    display: inline-block;
+}
+
+#nav li a,
+#header .user a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+}
+
+#nav > li:hover > a,
+#header .user a:hover{
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+#nav li a {
+    display: block;
+    padding: 5px 24px;
+}
+
+
+#nav > li > a {
+    text-transform: uppercase;
+}
+
+
+#header .customer {
+    margin-right: 24px;
+}
+
+#header .hotel-img {
+    height: 60px;
+    width: 200px;
+}
+
+#nav .nav-arrow-down {
+    font-size: 12px;
+}
+
+#nav {
+    position: relative;
+}
+
+#nav .sub-nav {
+    position: absolute;
+
+    display: none;
+    background-color: #000;
+    top: 100%;
+    /* right: 215px; */
+    right: 330px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    width: 120px;
+}
+
+
+#nav .sub-nav li a{
+    padding: 10px 17px;
+    font-size: 14px;
+    transition: 0.25s ease-in;
+}
+
+#nav > li:hover .sub-nav {
+    display: block;
+}
+
+#nav .sub-nav li:hover a {
+    color: rgb(112, 100, 50);
+    margin-left: 8px;
+}
+
+#nav .sub-nav li:hover {
+    opacity: 0.9;
+}
+
+#nav .sub-nav li:first-child {
+    border-top: 1px solid #fff;
+}
+
+/* ----------- HEADER USER ----------- */
+#nav-user li:hover a {
+    opacity: 0.8;
+}
+
+#nav-user {
+    position: relative;
+}
+
+#nav-user .sub-nav-user {
+    position: absolute;
+    display: none;
+    background-color: #000;
+    top: 100%;
+    right: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+    width: 120px;
+}
+
+#nav-user > li:hover .sub-nav-user {
+    display: block;
+}
+
+#nav-user .sub-nav-user li:nth-child(1) {
+    border-top: 1px solid #fff ;
+}
+
+#nav-user > li {
+    padding: 5px 24px;
+}
+
+#nav-user > li > a {
+    display: block;
+    width: 120px;
+    text-align: center;
+}
+
+#nav-user li:hover {
+    cursor: pointer;
+}
+
+#nav-user .sub-nav-user li a{
+    display: block;
+    padding: 10px 17px;
+    font-size: 14px;
+    transition: 0.25s ease-in;
+}
+
+#nav-user .sub-nav-user li:hover a {
+    color: rgb(112, 100, 50);
+    margin-left: 8px;
+}
+
+/* ========== ĐÁNH DẤU NAVBAR ======= */
+#nav .active a {
+    color: rgb(112, 100, 50); /* Màu chữ cho mục đang chọn */
+    font-weight: bold; /* Độ đậm cho mục đang chọn */
+    /* Các thuộc tính CSS khác tùy thuộc vào thiết kế của bạn */
+}
+
+/*============= Slider =============*/
+#slider {
+    margin-top: 60px;
+    /* height: 800px; */
+}
+
+#slider .slider-item {
+    width: 100vw;
+    height: 100vh;
+
+    position: relative;
+}
+
+.slider-item::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.slider-img-one {
+    background-image: url('../img/Background/hotel3.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.slider-img-two {
+    background-image: url('../img/Background/hotel3.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.slider-img-three {
+    background-image: url('../img/Background/Hotel.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#slider .slide-content {
+    position: relative;
+    top: 50%;
+    left: 80px;
+    transform: translateY(-50%);
+    color: #fff;
+    
+    text-shadow: 0 0 15px #000;
+    overflow: hidden;
+    
+}
+
+.text-content-head {
+    font-size: 40px;
+    font-weight: 600;
+}
+.text-content-body {
+    font-size: 14px;
+    font-weight: normal;
+    color: #ddd;
+}
+
+.text-content-body span {
+    font-style: italic;
+    font-weight: bold;
+    color: pink;
+    font-size: 17px;
+}
+
+/* ==========OWL============ */
+/* -------- Owl Slider ----- */
+#slider .owl-prev {
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    color: #a0a0a0b1 !important;
+    transform: translateY(-50%);
+    font-size: 45px !important;
+}
+
+#slider .owl-next {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    color: #a0a0a0b1 !important;
+    transform: translateY(-50%);
+    font-size: 45px !important;
+}
+
+#slider .owl-dots {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#slider .owl-dot span {
+    width: 10px !important;
+    height: 10px !important;
+    margin-top: 0px !important;
+    background-color: transparent !important;
+}
+
+#slider .owl-dot {
+    width: 23px;
+    height: 23px;
+    border: 2px solid #fff !important;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+#slider .owl-dot.active span {
+    background-color: rgba(255, 115, 190, 0.903) !important;
+    border-radius: 50%;
+}
+
+/* --------- OWL ROOM-LIST ----------*/
+.room .owl-dots {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    right: 50%;
+    bottom: 0px;
+    transform: translateY(-50%);
+}
+
+.room .owl-prev {
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    color: #a0a0a0b1 !important;
+    transform: translateY(-100%);
+    font-size: 40px !important;
+}
+
+.room .owl-next {
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    color: #a0a0a0b1 !important;
+    transform: translateY(-100%);
+    font-size: 40px !important;
+}
+
+/* ==============Content============= */
+
+/* --------------About-Us------------ */
+.content-section {
+    /* margin-top: 100px; */
+    margin-left: 80px;
+    margin-right: 80px;
+    padding-bottom:60px;
+    padding-top: 100px;
+}
+
+#content .about-us {
+    display: flex;
+    /* margin: 0px 80px 0px 80px; */
+    line-height: 1.5;
+    text-align: justify;
+    margin-top: 40px;
+}
+
+#content .about-content {
+    margin: 0px 10px 0px 10px;
+    padding: 0px 30px;
+    color: #313131;
+    flex-grow: 2;
+}
+
+#content .about-content-title {
+    margin-bottom: 15px;
+    color: #000;
+    text-transform: uppercase;
+    font-size: 35px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#content .about-content span {
+    font-weight: bold;
+}
+
+.image-one,
+.image-two {
+    margin: 0px 10px 0px 10px;
+    flex-grow: 1;
+}
+
+#content .about-us .image {
+    width: 250px;
+    height: 380px;
+    object-fit: cover; /* Đảm bảo ảnh không bị bóp méo */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+}
+
+/* -------------Room List------------- */
+#content .bg-room {
+    background-color: #f8f5f0;
+}
+
+#content .room-title {
+    padding: 70px 0px 5px 8px;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.room-list h2 {
+    text-transform: uppercase;
+    font-size: 35px;
+    font-weight: 500;
+    /* padding-top: 20px; */
+    text-align: center;
+}
+
+#content .room .image-room {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+#content .room .image-room:hover {
+    opacity: 1;
+    
+}
+
+#content .room {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 40px 0;
+}
+
+#content .room-items {
+    padding: 0px 10px;
+    border-left: 1px solid #bcbcbc;
+    position: relative;
+}
+
+#content .room-items p {
+    margin-top: 5px;
+}
+
+/* #content .room-list.content-section {
+    overflow: hidden;
+} */
+
+.room-items .room-btn {
+    /* position: absolute;
+    bottom: 0;
+    right: 0; */
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+}
+
+.room-items .room-btn a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.room-items .room-img {
+    display: block;
+    overflow: hidden;
+}
+
+.room-items .room-img .image-room{
+	display:block;
+	transition: all .3s ease;
+}
+
+.room-items .room-img .image-room:hover{
+	transform: scale(1.2); /* cỡ zoom khi di chuột vào */
+    object-fit: contain;
+
+} 
+
+/* -------------- Utility ------------ */
+.Utility .utility-title {
+    font-size: 35px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+#content .Utility .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+#content .utility-items {
+    flex-basis: 33.33333%;
+    padding: 15px;
+}
+
+.Utility .utility-content {
+    height: 150px;
+    padding: 20px 40px;
+    border: 1px solid rgb(112, 100, 50);
+    border-radius: 5px;
+    background-color: #f8f5f0;
+}
+
+.Utility .utility-content h5 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.Utility .utility-content p {
+    font-weight: 100;
+    color: #808080;
+}
+
+/* -------------- Contact ------------ */
+#content .contact h2{
+    font-size: 35px;
+    font-weight: 500;
+    padding-top: 20px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.contact .contact-content {
+    display: flex;
+    margin-top: 20px;
+}
+
+.contact .contact-content .img-contact,
+.contact .contact-content .info-contact
+{
+    width: 50%;
+}
+
+.contact .contact-content .img-contact img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.contact .contact-content .img-contact{
+    margin-right: 10px;
+}
+
+.contact .contact-content .info-contact {
+    margin-left: 10px;
+    line-height: 1.7;
+}
+
+.info-contact i[class*="ti-"] {
+    width: 30px;
+    display: inline-block;
+}
+
+/* ============Footer============= */
+#footer {
+    padding: 60px 16px;
+    text-align: center;
+}
+
+
+#footer .socials-list {
+    font-size: 24px;
+    
+}
+
+#footer .socials-list a {
+    color: rgba(0, 0, 0, 0.6);
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+#footer .socials-list a:hover {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+/* =================ADMIN=================== */
+/* ADMIN - navbar */
+#navbar,
+#ad-room-list {
+    margin-top: 60px;
+}
+
+#navbar {
+    position: fixed;
+    width: 190px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(112, 100, 50);
+}
+
+#navbar .nav li {
+    padding: 10px 15px 10px 5px;
+    border-bottom: 1.5px solid #444444;
+    /* transition: height 20s linear; */
+    /* transition: linear 0.25s; */
+}
+
+#navbar .nav li:last-child {
+    border: none;
+}
+
+#navbar .nav a{
+    display: block;
+    text-decoration: none;
+    color: #d5d5d5;
+    opacity: 0.7;
+}
+
+#navbar .nav a:hover {
+    opacity: 1;
+    /* text-align: center; */
+    font-weight: bold;
+}
+
+#navbar .nav li:hover {
+    background-color: rgb(135, 124, 81);
+}
+
+/* ADMIN - ad-room-list*/
+#ad-room-list {
+    float: right;
+    width: calc(100% - 190px);
+}
+
+#ad-room-list::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+/* #ad-room-list .ad-list-title {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+} */
+
+#ad-room-list table {
+    text-align: center;
+    margin: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#ad-room-list a {
+    text-decoration: none;
+}
+
+.ti-pencil,
+.ti-check-box {
+    color: #14aa03;
+}
+
+.ti-trash,
+.ti-notepad {
+    color: #ff0000;
+}
+
+/* ========= LOGIN & REGISTER ========== */
+
+.container-login-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f5f0;
+}
+
+.login-register {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: 60px;
+}
+
+.login-register h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(112, 100, 50);
+}
+
+.login-register form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-register form div {
+    margin-bottom: 15px;
+}
+
+.login-register form label {
+    font-weight: bold;
+}
+
+.login-register form input[type="email"],
+.login-register form input[type="password"],
+.login-register form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-register form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-register form button:hover {
+    background-color: #0056b3;
+}
+
+.login-register .text-alert {
+    /* text-align: center; */
+    font-size: 13px;
+    color: red;
+    font-weight: 600;
+}
+
+/* -------- ADD ROOM ---------- */
+#add-room {
+    margin-top: 80px;
+    float: right;
+    width: calc(100% - 190px);
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#add-room::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+#add-room .add-room-title {
+    text-align: center;
+}
+
+#add-room table {
+    border-collapse: collapse;
+    width: 60%;
+
+}
+
+#add-room table, #add-room th, #add-room td {
+    border: 1px solid black;
+}
+
+#add-room th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+#add-room input[type="text"],
+#add-room input[type="number"],
+#add-room input[type="email"],
+#add-room select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+#add-room input[type="file"] {
+    padding: 8px;
+    margin-top: 6px;
+    margin-bottom: 16px;
+}
+
+#add-room button[type="submit"],
+#add-room button[type="reset"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
+#add-room button[type="submit"]:hover,
+#add-room button[type="reset"]:hover {
+    background-color: #45a049;
+}
+
+#add-room button[type="reset"] {
+    background-color: #f44336;
+}
+
+#add-room button[type="reset"]:hover {
+    background-color: #da190b;
+}
+
+#add-room .btn {
+    order: 3;
+    padding-bottom: 50px;
+}
+
+/*================== GUEST ==================*/
+#inf-user {
+    float: right;
+    width: calc(100% - 190px);
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+#inf-user::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+#inf-user button[type="submit"] {
+    order: 2;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    background-color: #14aa03;
+    transition: transform ease .3s;
+}
+
+#inf-user button[type="submit"]:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.tb-info-user, .tb-info-user td {
+    width: 55%;
+    border: none;
+}
+
+.tb-info-user th {
+    width: 45%;
+    border: none;
+}
+
+.tb-info-user{
+    box-shadow: 0 0 10px rgba(56, 56, 56, 0.6);
+    padding: 10px;
+    width: 30%;
+    background-color: #fcfcfc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.tb-info-user th {
+    text-align: left;
+}
+
+.tb-info-user input {
+    width: 100%;
+    padding: 6px 5px;
+}
+
+
+/* ============ BOOKING ============ */
+.container-booking{
+    margin-top: 60px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+    background-color: #f8f5f0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-booking .item-img-booking {
+    width: 800px;
+    object-fit: cover;
+}
+
+.container-booking .item-img-booking .image-booking {
+    width: 100%;
+    filter: drop-shadow(0px 0px 15px rgb(86, 85, 85));
+}
+
+.content-booking {
+    display: flex;
+    justify-content: space-around;
+    width: 800px;
+    margin-top: 20px;
+}
+
+.inf-room {
+    border-right: 1px solid #000;
+    padding-right: 10px;
+}
+
+.inf-booking div {
+    margin-bottom: 10px;
+}
+
+.inf-booking label {
+    font-size: 16px;
+}
+
+.inf-booking input,
+.inf-booking textarea {
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.inf-booking button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(112, 100, 50);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.inf-booking button:hover {
+    background-color: rgb(142, 132, 90);
+}
+
+.inf-room,
+.inf-booking {
+    flex: 1;
+}
+
+.inf-booking {
+    padding-left: 20px;
+    padding-right: 10px;
+}

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    @* Include head elements *@
+    @Html.Partial("~/Views/elements/head.cshtml")
+</head>
+<body>
+    <div id="main">
+        @*{{-- Header --}}*@
+        @Html.Partial("~/Views/elements/header.cshtml")
+
+        @*{{-- Content --}}*@
+        @RenderBody()
+
+    </div>
+
+    @*{{-- JavaScript --}}*@
+    @Html.Partial("~/Views/elements/script.cshtml")
+</body>
+</html>

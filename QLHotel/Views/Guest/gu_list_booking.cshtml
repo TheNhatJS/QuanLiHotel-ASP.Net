@@ -1,0 +1,82 @@
+﻿@model IEnumerable<QLHotel.SQLHotel.tbl_booking>
+@using QLHotel.SQLHotel
+@{
+    Layout = "~/Views/Guest/Index.cshtml";
+    var Message = TempData["error"] as string;
+}
+
+@section gu_content
+{
+    <div id="ad-room-list">
+        <div style="width: 90%; background-color: #b5e1f4; padding: 5px; margin: 20px auto 10px auto; text-align: center; border-radius: 5px">
+            <h1 class="ad-list-title">Danh sách đặt phòng</h1>
+        </div>
+
+        <div id="error-message" class="text-alert" style="color: red; font-weight: 700">
+            @Message
+        </div>
+
+        <div style="padding: 20px; background-color: #fcfcfc; box-shadow: 0 0 10px rgba(56, 56, 56, 0.6); border-radius: 5px; width: 90%; margin: auto">
+
+            <table border="1px">
+                <thead style="background-color: #b5e1f4;">
+                <th>STT</th>
+                <th>Ảnh</th>
+                <th>Tên phòng</th>
+                <th>Thông tin đặt phòng</th>
+                <th>Thông tin khách hàng</th>
+
+                <th colspan="2">Action</th>
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int key = 0;
+                        foreach (var cateBooking in Model)
+                        {
+                            var db = new QLKhachSanEntities1(); // Tạo đối tượng DbContext
+                            var room = db.tbl_room.FirstOrDefault(r => r.roomID == cateBooking.roomID);
+                            var user = db.tbl_user.FirstOrDefault(u => u.userID == cateBooking.userID);
+                            if (room != null && user != null)
+                            {
+                                key++;
+                                <tr>
+                                    <td>@key</td>
+                                    <td><img src="~/hotel/assets/img/Room/@room.image" alt="" style="width:100%;"></td>
+                                    <td>@room.name</td>
+                                    <td>
+                                        Số người: @cateBooking.odCountPeople <br>
+                                        Ngày nhận phòng: @cateBooking.checkInDate <br>
+                                        Ngày trả phòng: @cateBooking.checkOutDate <br>
+                                        Ghi chú: @cateBooking.note <br>
+                                    </td>
+                                    <td>
+                                        Name: @user.name <br>
+                                        Phone: @user.phone <br>
+                                        Email: @user.email <br>
+
+                                    </td>
+
+                                    <td>
+                                        <a href="@Url.Action("gu_updateBooking", "Guest", new { idBooking = cateBooking.bookingID })">
+                                            <i class="ti-pencil">
+
+                                            </i>
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        <a href="@Url.Action("removeBooking", "Guest", new { idBooking = cateBooking.bookingID })" onclick="return confirm('Bạn có chắc chắn muốn xóa không?')"><i class="ti-trash"></i></a>
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
